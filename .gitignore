@@ -2,3 +2,5 @@
 __pychache__/
 .idea/
 config.py
+logs/
+*.log
