@@ -1,4 +1,6 @@
-import pymongo, aioredis
+import aioredis
+import pymongo
+
 from config import mongo_max_connections, mongo_host, mongo_port, mongo_min_connections
 from config import redis_min_connections, redis_max_connections, redis_host, redis_port
 
