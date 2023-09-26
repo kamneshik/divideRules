@@ -1,32 +1,55 @@
 from loguru import logger
 
-log_format = (
+start_log_format = (
+    "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+    "<level>{level: <8}</level> | "
+    "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - "
+    "<level>{message}</level>"
+)
+
+log_format_info = (
     "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
     "<level>{level: <8}</level> | "
     "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - "
     "<level>{message}</level> | "
-    "Method: <cyan>{extra[method]}</cyan> | "
-    "Path: <cyan>{extra[path]}</cyan> | "
-    "Status: <cyan>{extra[status]}</cyan> | "
+    "path: <cyan>{extra[path]}</cyan> | "
     "Time Elapsed: <cyan>{extra[time_elapsed]}</cyan> | "
-    "End Time: <cyan>{extra[end_time]}</cyan> | "
-    "Function: <cyan>{extra[function]}</cyan>"
+    "Time: <cyan>{time}</cyan> | "
 )
 
+log_format_error = (
+    "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+    "Error: {message}"
+    "End Time: <cyan>{extra[end_time]}</cyan> | "
+)
 
 logger.configure(
     handlers=[
         {
             "sink": "logs/app.log",
-            "format": log_format,
             "rotation": "1 week",
+            "format": start_log_format,
+            "level": "STARTAPP",
+        },
+        {
+            "sink": "logs/app.log",
+            "rotation": "1 week",
+            "format": log_format_info,
+            "level": "INFO",
+        },
+{
+            "sink": "logs/app.log",
+            "rotation": "1 week",
+            "format": log_format_info,
+            "level": "SUCCESS",
         },
         {
             "sink": "logs/errors.log",
             "level": "ERROR",
-            "format": log_format,
+            "format": log_format_error,
             "rotation": "1 week",
         },
     ],
-    level="INFO"
+    levels=[dict(name="STARTAPP", no=13, icon="¤", color="")]
+
 )
