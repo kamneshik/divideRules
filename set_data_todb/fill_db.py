@@ -18,7 +18,7 @@ def connect_and_fill_data(records: list[dict]):
 
         with session.start_transaction():
             db = conn.divideRules
-            collection = db.mycollection
+            collection = db.roles
             unique_records = []
 
             for record in records:
@@ -42,7 +42,7 @@ def connect_and_fill_data(records: list[dict]):
 
 
 if __name__ == "__main__":
-    #path = r"C:\Users\Maksim\PycharmProjects\divideRules\set_data_todb\Roles and TIERS.xlsx"
-    #data = read_data_from_excel(path)
-    #connect_and_fill_data(data)
-    pass
+    path = r"C:\Users\Maksim\PycharmProjects\divideRules\set_data_todb\Roles and TIERS.xlsx"
+    data = read_data_from_excel(path)
+    connect_and_fill_data(data)
+
